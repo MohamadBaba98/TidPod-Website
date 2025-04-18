@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TidPod - AI-Powered Personalized News Podcasts</title>
+    <style>
+        :root {
+            --primary-color: #722cc2;
+            --primary-light: #8e4fd6;
+            --primary-dark: #5a1fa8;
+            --text-color: #333333;
+            --light-text: #f8f8f8;
+            --background: #ffffff;
+            --secondary-bg: #f5f5f5;
+            --max-width: 2000px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--background);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        header {
+            background-color: var(--background);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: left;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 35px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .status {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: grid;
+            place-items: center;
+            /* centers both horizontally and vertically */
+        }
+
+        @media (max-width: 768px) {
+            .hidden-on-mobile {
+                display: none;
+            }
+        }
+
+        .hero {
+            padding: 150px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+            color: var(--light-text);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .mission {
+            padding: 2em 0;
+            text-align: left;
+            background: linear-gradient(135deg, #f8f1ff 0%, #ffffff 100%);
+        }
+
+        .mission-content {
+            /* max-width: 80%; */
+            margin: 0 auto;
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        .mission-content p {
+            margin-bottom: 24px;
+        }
+
+        .mission strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .cta-line {
+            font-size: 22px;
+            margin-top: 40px;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        @keyframes fireworks {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+                box-shadow: 0 0 5px rgba(142, 79, 214, 0.8), 0 0 10px rgba(142, 79, 214, 0.6);
+            }
+
+            50% {
+                transform: scale(2);
+                opacity: 0.5;
+                box-shadow: 0 0 15px rgba(142, 79, 214, 0.8), 0 0 25px rgba(142, 79, 214, 0.6);
+            }
+
+            100% {
+                transform: scale(3);
+                opacity: 0;
+                box-shadow: 0 0 20px rgba(142, 79, 214, 0.8), 0 0 35px rgba(142, 79, 214, 0.6);
+            }
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--light-text);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-button:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: rgba(142, 79, 214, 0.3);
+            /* Very light shade of #8e4fd6 */
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: fireworks 2s ease-out infinite;
+            /* Slower animation (2 seconds) */
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        .cta-button:hover:after {
+            opacity: 1;
+            /* Show the fireworks on hover */
+        }
+
+        .features {
+            padding: 80px 0;
+            background-color: var(--secondary-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 36px;
+            color: var(--primary-color);
+        }
+
+        .coming-soon {
+            text-align: center;
+            font-size: 36px;
+            color: var(--primary-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            counter-reset: step-counter;
+        }
+
+        .feature-card {
+            background-color: var(--background);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+            padding-top: 60px;
+        }
+
+        .feature-card::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        .waitlist {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .waitlist-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .waitlist h2 {
+            margin-bottom: 20px;
+        }
+
+        .waitlist p {
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--light-text);
+            padding: 30px 0;
+            text-align: left;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: left;
+        }
+
+        .footer-links a {
+            color: var(--light-text);
+            margin-left: 20px;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .mission-content {
+                font-size: 18px;
+                padding: 0 20px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-links {
+                margin-top: 20px;
+            }
+
+            .footer-links a {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Tid🎙️Pod</a>
+                <a href="#" class="status hidden-on-mobile">🚧 Startup Under Construction! 🚧</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Your AI-Powered News Digest</h1>
+            <p>The first podcasting experince tailored for your preferences needs & interestes. Curated by you for you!
+            </p>
+            <a href="#waitlist" class="cta-button">🚀 Join the Waitlist 🚀</a>
+        </div>
+    </section>
+
+    <section class="mission">
+        <div class="container">
+            <h2 class="section-title">Reclaim Your Time, Rediscover Your Curiosity</h2>
+            <div class="mission-content">
+                <p>In today's overwhelming news landscape, you shouldn't have to choose between staying informed and
+                    living your life.</p>
+                <p>TidPod cuts through the noise with AI-curated audio briefs that deliver <strong>only what matters to
+                        you</strong> - no endless scrolling, no irrelevant fluff, just <strong>personalized
+                        knowledge</strong> in the time you have available.</p>
+                <p>We're putting <strong>you in control</strong> of what news you consume, when, and how it fits into
+                    your routine.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">How TidPod Works?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📰</div>
+                    <h3>Select Your News Sources</h3>
+                    <p>Build your own news network by selecting sources you trust.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>Define Your Interests</h3>
+                    <p>Use natural language or tags to specify exactly what topics you care about.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Set Your Listening Preferences</h3>
+                    <p>Choose your ideal podcast length (5-10 minutes) and preferred delivery schedule (daily, weekly,
+                        or custom).</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎧</div>
+                    <h3>Enjoy Your Personalized Podcast</h3>
+                    <p>Receive balanced, AI-curated news briefings that fit perfectly into your routine, with no
+                        information overload or fluff.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission">
+        <div class="container">
+            <h2 class="coming-soon">Podcast Samples Comming Soon ⏳</h2>
+        </div>
+    </section>
+
+    <section class="waitlist" id="waitlist">
+        <div class="container">
+            <div class="waitlist-content">
+                <h2 class="section-title">🔔 Be the First to Experience TidPod</h2>
+                <p>We're currently refining our AI models to deliver the most relevant news experience. Join our
+                    waitlist for early access and exclusive updates</p>
+                <div id="getWaitlistContainer" data-waitlist_id="27492" data-widget_type="WIDGET_2"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">© 2025 TidPod. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <link rel="stylesheet" type="text/css"
+        href="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css" />
+    <script src="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.js"></script>
+</body>
+
+</html>
