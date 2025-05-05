@@ -6,12 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TidPod - AI-Powered Personalized News Podcasts | Curated Daily Briefings</title>
     <!-- Meta Description -->
-    <meta name="description" content="TidPod delivers AI-curated, personalized news podcasts tailored to your interests. Get daily briefings without the noise. Join the waitlist today!">
+    <meta name="description"
+        content="TidPod delivers AI-curated, personalized news podcasts tailored to your interests. Get daily briefings without the noise. Join the waitlist today!">
     <!-- Canonical URL -->
     <link rel="canonical" href="https://yourwebsite.com" />
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="TidPod - AI-Powered Personalized News Podcasts">
-    <meta property="og:description" content="Get AI-curated news briefings tailored to your interests. No fluff, just what matters to you.">
+    <meta property="og:title" content="TidPod - The Personal Podcasting Service">
+    <meta property="og:description"
+        content="Get AI-curated news briefings tailored to your interests. No fluff, just what matters to you.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://tidpod.com">
     <meta property="og:image" content="https://tidpod.com/images/tidpod-social-preview.jpg">
@@ -267,6 +269,42 @@
             margin-bottom: 15px;
         }
 
+        /* Logo Scroller Styles */
+        .logo-scroller {
+            padding: 40px 0;
+            background-color: var(--background);
+            overflow: hidden;
+        }
+
+        .scroller-container {
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+        }
+
+        .scroller-track {
+            display: flex;
+            animation: scroll 75s linear infinite;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            margin: 0 40px;
+            filter: grayscale(0%) brightness(1.5);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
         .waitlist {
             padding: 80px 0;
             text-align: center;
@@ -334,6 +372,12 @@
             .footer-links a {
                 margin: 0 10px;
             }
+
+            /* Adjust scroller for mobile */
+            .logo {
+                height: 40px;
+                margin: 0 20px;
+            }
         }
     </style>
     <link rel="icon" href="https://fav.farm/🎙️" />
@@ -341,7 +385,7 @@
 
 <body>
     <header>
-        
+
         <div class="container">
             <nav>
                 <a href="#" class="logo">Tid🎙️Pod</a>
@@ -410,6 +454,14 @@
         </div>
     </section>
 
+    <section class="logo-scroller">
+        <div class="scroller-container">
+            <div class="scroller-track" id="scrollerTrack"></div>
+        </div>
+    </section>
+
+
+
     <section class="waitlist" id="waitlist">
         <div class="container">
             <div class="waitlist-content">
@@ -432,6 +484,96 @@
     <link rel="stylesheet" type="text/css"
         href="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.css" />
     <script src="https://prod-waitlist-widget.s3.us-east-2.amazonaws.com/getwaitlist.min.js"></script>
+
+    <script>
+        const logoUrls = [
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-04/37a67e30-ded2-11ed-97cf-79b7971fe48b",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-07/84c84470-c5d3-11ea-9e55-b8bf284d5aba",
+            "https://s.yimg.com/os/creatr-uploaded-images/2025-04/11e4c040-1944-11f0-bdf7-c3a2c13cf35a",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-12/e70e9a00-35a2-11eb-bdfd-3f73c982ffa9",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-11/f4b4e310-2b77-11eb-afee-ca1478f0e9ef",
+            "https://s.yimg.com/os/creatr-uploaded-images/2025-01/26cbaa20-dd92-11ef-bd7e-c372bc4f68a3",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-11/31ae7500-2b10-11eb-bfff-af54d62fa6aa",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-10/13b69d40-9301-11ef-bdbc-826db270f38e",
+            "https://s.yimg.com/os/creatr-uploaded-images/2021-03/321aa7b0-87ff-11eb-bf7e-1847bb168ee7",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-11/62e21440-2fbd-11eb-95ff-5673fa3d2f9f",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-10/ea05e540-9301-11ef-beff-21bfc3e75c55",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-07/d6107830-25a1-11ee-91ff-38f8593f6850",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-11/68ac7fd0-2fba-11eb-8bfe-6a6bf2f46fb1",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-12/e6bfd660-c232-11ef-b5f1-f9aad690e86c",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-11/ea7626b0-2b28-11eb-a4ed-68d596abe108",
+            "https://s.yimg.com/os/creatr-uploaded-images/2022-03/fbb1e190-aac9-11ec-9ddb-b696f4e07a79",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-11/72933370-7dbb-11ee-bbdf-185c76170239",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-05/94412a40-f972-11ed-9dbf-e96da1b79d6c",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-12/d7df1000-34e4-11eb-b6ae-ac87660fe5ee",
+            "https://s.yimg.com/os/creatr-uploaded-images/2021-03/7d6207c0-7d34-11eb-bbee-858baefb8682",
+            "https://s.yimg.com/os/creatr-uploaded-images/2025-03/c1426da0-f9f3-11ef-8fdd-7bb88488c741",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-10/ea616b60-9575-11ef-bd57-3e9fd6bb323e",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-10/dd75cd20-66db-11ee-bf7d-1bf8634a406b",
+            "https://s.yimg.com/os/creatr-uploaded-images/2022-08/0f36fba0-1cea-11ed-bee7-af68ceb219c6",
+            "https://s.yimg.com/os/creatr-uploaded-images/2021-03/e31acf60-80f5-11eb-9fff-18c6b7043df9",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-04/81befb70-0706-11ef-9fbf-6960dce53585",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-10/9e9b7040-8256-11ef-bf7f-e1488b49cbe5",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-10/2cca9c10-9305-11ef-b2fd-a6eb3406a7fb",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-01/277b6e90-abbe-11ed-9aff-cdd0e191fce0",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-10/5c920e10-9576-11ef-affc-948f11a63bc1",
+            "https://s.yimg.com/os/creatr-uploaded-images/2025-01/88364d00-d410-11ef-beff-b428e6fcfd64",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-11/79acbcd0-78ed-11ee-bcfd-0738e98ce395",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-12/02246f50-3412-11eb-bfdd-de89f8b3b8b8",
+            "https://s.yimg.com/os/creatr-uploaded-images/2021-03/09e358d0-7b95-11eb-be9f-cc56c439d1d7",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-10/515f50a0-0f30-11eb-9ebf-0273aacc9ef0",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-10/b3b21ea0-9301-11ef-9ff7-bee5a4e8110f",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-10/7a17aaa0-71fd-11ee-bbf2-06d0c1f3a7ba",
+            "https://s.yimg.com/os/creatr-uploaded-images/2021-02/fdc494d0-7160-11eb-bdff-bdf03c7194b2",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-10/c4d907b0-9302-11ef-afb0-ad142fedb495",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-06/366548c0-095d-11ee-bfd8-b39ec3295050",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-12/7b119900-33ff-11eb-bfdb-7285d8d09984",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-08/f2098ae0-5106-11ef-bca4-b55ed09f2855",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-09/aa922700-50e2-11ee-b5fc-96c8213fca67",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-12/f47ae180-c22f-11ef-bb6b-8c68a34cf959",
+            "https://s.yimg.com/os/creatr-uploaded-images/2021-03/6b0cc760-8b56-11eb-8fd5-fdff55766044",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-11/3bc15d30-250e-11eb-bffb-472fe5eb11fe",
+            "https://s.yimg.com/os/creatr-uploaded-images/2022-01/ff845300-7fab-11ec-beff-9bd353ee8bcc",
+            "https://s.yimg.com/os/creatr-uploaded-images/2021-02/16277460-6faa-11eb-bfa3-d0bf7896402a",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-12/e6566990-ac09-11ee-8ca4-6f761a016bea",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-11/1c9fa050-8272-11ee-9f7b-ad7aafe47d44",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-10/ac7282c0-9576-11ef-beee-5459d82d48dc",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-12/90fe2e40-9383-11ee-afba-e10366cf6e23",
+            "https://s.yimg.com/os/creatr-uploaded-images/2022-08/6c64e560-2944-11ed-9d7b-b2eecf88f913",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-06/d087c240-2cdc-11ef-a7fa-1e26e21a0640",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-12/9b2f0f90-355f-11eb-bef3-afd1c608253f",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-04/0f747c30-02f5-11ef-bfbf-3621ac7c7fcb",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-11/29c0c440-2a63-11eb-aff7-af8d7ebd46a4",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-11/333511f0-8273-11ee-afce-aec25897e342",
+            "https://s.yimg.com/os/creatr-uploaded-images/2021-03/6700d450-7c69-11eb-9fef-632525639065",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-05/a4c12fa0-0e3e-11ef-a7af-6c8a911e4e8f",
+            "https://s.yimg.com/os/creatr-uploaded-images/2023-09/ee6ba310-4dcd-11ee-abb6-d9983ff24d1b",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-08/13434730-66fd-11ef-8fab-6ea5cc9e473a",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-01/fee16a90-aa52-11ee-9fef-a19483cc6d78",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-10/c2c8f6f0-9303-11ef-bfff-9abf75c82304",
+            "https://s.yimg.com/os/creatr-uploaded-images/2024-01/843fa1d0-c429-11ee-9ffc-fcd336cb7829",
+            "https://s.yimg.com/os/creatr-uploaded-images/2020-12/2b82d430-3567-11eb-be1f-26e8c03de24e"
+        ];
+
+        const scrollerTrack = document.getElementById('scrollerTrack');
+
+        // Create two sets of logos for seamless looping
+        logoUrls.forEach(url => {
+            const logo = document.createElement('img');
+            logo.src = url;
+            logo.className = 'logo';
+            logo.alt = 'Partner logo';
+            scrollerTrack.appendChild(logo);
+        });
+
+        logoUrls.forEach(url => {
+            const logo = document.createElement('img');
+            logo.src = url;
+            logo.className = 'logo';
+            logo.alt = 'Partner logo';
+            scrollerTrack.appendChild(logo);
+        });
+    </script>
 </body>
 
 </html>
