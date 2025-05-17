@@ -269,6 +269,49 @@
             margin-bottom: 15px;
         }
 
+        /* Audio Samples Section */
+        .audio-samples {
+            padding: 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #f8f1ff 0%, #ffffff 100%);
+        }
+
+        .samples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .sample-card {
+            background-color: var(--background);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .sample-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .sample-icon {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .sample-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 20px;
+        }
+
         /* Logo Scroller Styles */
         .logo-scroller {
             padding: 40px 0;
@@ -448,9 +491,39 @@
         </div>
     </section>
 
-    <section class="mission">
+    <section class="audio-samples">
         <div class="container">
-            <h2 class="coming-soon">Podcast Samples Comming Soon ⏳</h2>
+            <h2 class="section-title">🎧 Sample Podcasts</h2>
+            <h3>Get a taste of what TidPod will sound like with these sample briefings, all in under 5 minutes</h3>
+            <div class="samples-grid">
+                <div class="sample-card">
+                    <div class="sample-icon">⚽</div>
+                    <h3>Sports Briefing</h3>
+                    <p>Your daily sports update in under 5 minutes</p>
+                    <audio controls>
+                        <source src="./media/sports.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="sample-card">
+                    <div class="sample-icon">💻</div>
+                    <h3>Tech Briefing</h3>
+                    <p>The latest in technology and innovation</p>
+                    <audio controls>
+                        <source src="./media/tech.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+                <div class="sample-card">
+                    <div class="sample-icon">📈</div>
+                    <h3>Business Briefing</h3>
+                    <p>Market updates and business news</p>
+                    <audio controls>
+                        <source src="./media/business.mp3" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -459,8 +532,6 @@
             <div class="scroller-track" id="scrollerTrack"></div>
         </div>
     </section>
-
-
 
     <section class="waitlist" id="waitlist">
         <div class="container">
